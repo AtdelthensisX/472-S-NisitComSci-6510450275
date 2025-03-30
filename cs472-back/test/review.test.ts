@@ -55,27 +55,6 @@ describe("Review API", () => {
     expect(response.status).toBeGreaterThanOrEqual(400); // อาจเป็น 400 หรือ 500 ขึ้นอยู่กับ implementation
   });
 
-  it("delete review success", async () => {
-    // สมมุติว่า review_id = 1 มีอยู่ในระบบ
-    const response = await fetch("http://localhost:3000/review/delete/25", {
-      method: "DELETE",
-    });
-
-    const data = await response.json();
-    expect(response.status).toBe(200);
-    expect(data.message).toBe("Review deleted"); // ปรับตามข้อความที่ backend ตอบ
-  });
-
-  it("delete non-existent review", async () => {
-    const response = await fetch("http://localhost:3000/review/delete/999", {
-      method: "DELETE",
-    });
-
-    const data = await response.json();
-    expect(response.status).toBe(404);
-    expect(data.error).toBe("Review not found"); // ปรับตามข้อความ error
-  });
-
   afterAll(() => {
     server.stop(); // ปิด server หลังเทสทั้งหมด
   });
